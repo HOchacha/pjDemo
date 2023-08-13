@@ -36,7 +36,28 @@ public class MemberService {
             return null;
         }
     }
+    public MemberDTO putMemberData(MemberDTO body) {
+        Optional<Member> result = memberRepository.findMemberByName(body.getName());
+        if(result.isPresent()) {
+            Member entity = result.get();
+            Member updatedEntity = entity.builder().name(body.getName()).gender(body.getGender()).major(body.getMajor()).age(body.getAge()).plan(body.getPlan()).build();
+            memberRepository.save(updatedEntity);
+            return getMemberDataByName(body.getName());
+        }else {
+            return null;
+        }
+
+    }
+    public void deleteMemberData(String name) {
+        Optional<Member> result = memberRepository.findMemberByName(name);
+        if(result.isPresent()) {
+            memberRepository.delete(result.get());
+        }
+    }
     private MemberDTO convertToDTO(Member member) {
         return new MemberDTO(member.getNum(), member.getName(), member.getGender(), member.getAge(), member.getMajor(), member.getPlan());
     }
+
+
+
 }

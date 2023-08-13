@@ -14,12 +14,13 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableJpaAuditing
 @EntityListeners(AuditingEntityListener.class)
 public class Member {
-    @Id
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     private Integer num;
 
-    @Column(length = 50)
+    @Id
+    @Column(length = 50, nullable = false)
     private String name;
 
     @Column(length = 50)
