@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberDTO {
-    private Integer num;
+
     private String name;
     private String gender;
     private int age;
